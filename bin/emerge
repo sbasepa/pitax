@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 import sys
 import os
+import subprocess
 
 try:
-    if (os.path.exists(f'etc/pitax/code/{(sys.argv[1])[2:]}.py')):
-        os.system(f'python3 etc/pitax/code/{(sys.argv[1])[2:]}.py {' '.join(sys.argv[2:])}')    
+    if (os.path.exists(f'/root/k/Pitax/etc/pitax/code/{(sys.argv[1])[2:]}.py')):
+        subprocess.run(['python3', f'/root/k/Pitax/etc/pitax/code/{(sys.argv[1])[2:]}.py', ' '.join(sys.argv[2:])], check=True)    
     else:
-        print("j")
+        print("No action found for", sys.argv[1])
 except Exception as e:
     print("Error: ", e)
