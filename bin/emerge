@@ -1,1 +1,11 @@
+#!/usr/bin/python3
+import sys
+import os
 
+try:
+    if (os.path.exists(f'etc/pitax/code/{(sys.argv[1])[2:]}.py')):
+        os.system(f'python3 etc/pitax/code/{(sys.argv[1])[2:]}.py {' '.join(sys.argv[2:])}')    
+    else:
+        print("j")
+except Exception as e:
+    print("Error: ", e)
