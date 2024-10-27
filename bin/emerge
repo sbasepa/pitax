@@ -1,12 +1,23 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 import sys
-import os
-import subprocess
+from portage import core
 
-try:
-    if (os.path.exists(f'/root/k/Pitax/etc/pitax/code/{(sys.argv[1])[2:]}.py')):
-        subprocess.run(['python3', f'/root/k/Pitax/etc/pitax/code/{(sys.argv[1])[2:]}.py', ' '.join(sys.argv[2:])], check=True)    
+def main():
+    if len(sys.argv) < 2:
+        print("Usage: mini-emerge [install|remove|list] <package>")
+        sys.exit(1)
+
+    command = sys.argv[1]
+    package = sys.argv[2] if len(sys.argv) > 2 else None
+
+    if command == "install" and package:
+        core.install_package(package)
+    elif command == "remove" and package:
+        core.remove_package(package)
+    elif command == "list":
+        core.list_packages()
     else:
-        print("No action found for", sys.argv[1])
-except Exception as e:
-    print("Error: ", e)
+        print("Invalid command or missing package name.")
+
+if __name__ == "__main__":
+    main()
